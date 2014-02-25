@@ -6,20 +6,44 @@
   <script type="text/javascript">
     function handleForm() {
       var nameInput = $("#catform > fieldset > input[name=nimi]");
+      var nameError = $("#nimi-viga");
+
       var name = nameInput.val();
       if (!name) {
         nameInput.css("border-color", "red");
+        nameError.css("display", "inline");
+        nameError.text("Kassi nimi peab olema määratud!");
       } else {
         nameInput.css("border-color", "");
+        nameError.css("display", "none");
       }
+
       var yearInput = $("#catform > fieldset > input[name=synniaasta]");
-      var year = parseInt(yearInput.val());
+      var yearVal = yearInput.val();
+      var year = parseInt(yearVal);
       var currentYear = 1900 + new Date().getYear();
-      if (!year || year > currentYear || (currentYear - year) > 50) {
+
+      var viga = false;
+      if (!yearVal) {
+        viga = "Kassi sünniaasta peab olema määratud!";
+      } else if (isNaN(year)) {
+        viga = "Kassi sünniaasta tuleks anda numbrilisel kujul!";
+      } else if (year > currentYear) {
+        viga = "Kassi sünniaasta ei tohi olla tulevikus!";
+      } else if ((currentYear - year) > 50) {
+        viga = "Kassi vanus ei tohi ületada 50 aastat!"
+      }
+
+      var yearError = $("#synniaasta-viga");
+      if (viga) {
         yearInput.css("border-color", "red");
+        yearError.css("display", "inline");
+        yearError.text(viga);
       } else {
         yearInput.css("border-color", "");
+        yearError.css("display", "none");
       }
+
       return false;
     }
   </script>
@@ -30,16 +54,18 @@
       <legend>Sisesta kassi andmed</legend>
       <label for="nimi">Nimi:</label>
       <input id="nimi" name="nimi" type="text" />
+      <span id="nimi-viga" style="display: none; color: red;"></span>
       <br />
       <label for="synniaasta">Sünniaasta:</label>
       <input id="synniaasta" name="synniaasta" type="text" />
+      <span id="synniaasta-viga" style="display:hidden; color: red;"></span>
       <br />
       <input value="Saada" type="submit" />
     </fieldset>
   </form>
   <script type="text/javascript">
     $.ready(function() {
-      $("#catform.input").keypress(function(e) {
+      $("#catform > input").keypress(function(e) {
         if (e.which == 13) {
           $("#catform").submit();
           e.preventDefault();
