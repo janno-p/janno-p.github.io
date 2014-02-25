@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script type="text/javascript">
+    function handleForm() {
+      var nameInput = $("#catform > fieldset > input[name=nimi]");
+      var name = nameInput.val();
+      if (!name) {
+        nameInput.css("border-color", "red");
+      } else {
+        nameInput.css("border-color", "");
+      }
+      var yearInput = $("#catform > fieldset > input[name=synniaasta]");
+      var year = parseInt(yearInput.val());
+      var currentYear = 1900 + new Date().getYear();
+      if (!year || year > currentYear || (currentYear - year) > 50) {
+        yearInput.css("border-color", "red");
+      } else {
+        yearInput.css("border-color", "");
+      }
+      return false;
+    }
+  </script>
+</head>
+<body>
+  <form id="catform" action="" onsubmit="return handleForm();">
+    <fieldset>
+      <legend>Sisesta kassi andmed</legend>
+      <label for="nimi">Nimi:</label>
+      <input id="nimi" name="nimi" type="text" />
+      <br />
+      <label for="synniaasta">Sünniaasta:</label>
+      <input id="synniaasta" name="synniaasta" type="text" />
+      <br />
+      <input value="Saada" type="submit" />
+    </fieldset>
+  </form>
+  <script type="text/javascript">
+    $.ready(function() {
+      $("#catform.input").keypress(function(e) {
+        if (e.which == 13) {
+          $("#catform").submit();
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
