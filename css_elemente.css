@@ -1,0 +1,75 @@
+
+img.kole-nupp {
+  border-style: outset;
+}
+
+img.kole-nupp:hover {
+  background-color: red;
+}
+
+img.kole-nupp:active {
+  background-color: green;
+  border-style: inset;
+}
+
+img.dialog {
+  width: 16px;
+  height: 16px;
+  background: url(https://ssl.gstatic.com/docs/spreadsheets/MainMenuHorSprite015.gif) -480px 0;
+}
+
+img.gear {
+  width: 16px;
+  height: 16px;
+  background: url(https://ssl.gstatic.com/docs/spreadsheets/MainMenuHorSprite015.gif) -835px 0;
+}
+
+img.env {
+  width: 16px;
+  height: 16px;
+  background: url(https://ssl.gstatic.com/docs/spreadsheets/MainMenuHorSprite015.gif) -528px 0;
+}
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+thead {
+  border: 1px solid black;
+  /*background-color: gray;
+  color: white;*/
+}
+
+thead th {
+  padding: 5px;
+  border-right: 1px solid black;
+}
+
+table td {
+  padding: 5px;
+  border-right: 1px solid black;
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+span.sort {
+  padding-left: 3px;
+  color: #eee;
+}
+
+span.active {
+  color: black;
+}
+
+span.sort:hover {
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
