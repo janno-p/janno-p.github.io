@@ -1,3 +1,17 @@
+var users = (function () {
+  var users = null;
+  $.ajax({
+    'async': false,
+    'global': false,
+    'url': 'data/users.json',
+    'dataType': 'json',
+    'success': function (data) {
+      users = data;
+    }
+  });
+  return users;
+})();
+
 function setupValidation() {
   $("form#login").validate({
     showErrors: function (errorMap, errorList) {
@@ -20,12 +34,12 @@ function setupValidation() {
     submitHandler: function (form) {
       var $email = $(form).find("input[type='email']");
       var emailValue = $email.val();
-      if (emailValue == "tere@gmail.com") {
-        window.location.href = "citizen.htm";
+      if (emailValue == users[0].email) {
+        window.location.href = "index-citizen.htm";
         return false;
       }
-      if (emailValue == "admin@gmail.com") {
-        window.location.href = "security.htm";
+      if (emailValue == users[1].email) {
+        window.location.href = "index-official.htm";
         return false;
       }
       $email.parent()
@@ -38,3 +52,14 @@ function setupValidation() {
     }
   });
 }
+
+$(document).ready(function () {
+  $.get('partial/navbar.htm', function (data) {
+    $('body').prepend(data);
+    $.get('partial/navbar-login.htm', function (data) {
+      $('#navbar-container').append(data);
+      setupValidation();
+      $("form#login").find("input[type='email']").focus();
+    });
+  });
+});

@@ -66,18 +66,6 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/docs.min.js"></script>
 
-    <script src="js/idelo/login.js"></script>
-
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $.get('partial/navbar.htm', function (data) {
-          $('body').prepend(data);
-          $.get('partial/login.htm', function (data) {
-            $('#navbar-container').append(data);
-            setupValidation();
-          });
-        });
-      });
-    </script>
+    <script src="js/idelo/index.js"></script>
   </body>
 </html>
